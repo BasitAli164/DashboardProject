@@ -1,4 +1,4 @@
-import mongoose, { Mongoose, Schema, Document } from "mongoose";
+import mongoose, {  Schema, Document } from "mongoose";
 import { unique } from "next/dist/build/utils";
 import { string } from "zod";
 
