@@ -26,6 +26,17 @@ export const POST = async (request: Request) => {
     const existingUserVerifiedByEmail = await userModel.findOne({
       email,
     });
+    if(existingUserVerifiedByEmail){
+        true //Todo: Back Herer
+    }else{
+        const hashPassword=await bcrypt.hash(password,10);
+        const expiryDate=new Date{}
+        expiryDate.setHours(expiryDate.getHours()+1  )
+
+    }
+    new userModel({
+        
+    })
   } catch (error) {
     console.error("Error registering user", error);
     return Response.json(
