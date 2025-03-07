@@ -4,7 +4,7 @@ import { string } from "zod";
 
 // Define the structure for Message Schema
 
-interface Message extends Document {
+export interface Message extends Document {
   content: string;
   createDate: Date;
 }
