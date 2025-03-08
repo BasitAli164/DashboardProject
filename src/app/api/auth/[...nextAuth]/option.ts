@@ -24,13 +24,32 @@ export const authOption:NextAuthOptions={
                             {username:credentials.identifier}
                         ]
                     })
-                    i
-                    
+                    if(!user){
+                        throw new Error("No user found with this email")
+                    }
+                    if(!user.isVerified){
+                        throw new Error("Please verify your account befor login")
+                    }
+                    const isPasswordCorrect= await bcrypt.compare(credentials.password,user.password)
+                    if(isPasswordCorrect){
+                        return user
+                    }else{
+                        throw new Error("Incorrect Password!")
+                    }
                 } catch (err:any) {
                     throw new Error(err)
                     
                 }
             }
         })
-    ]
+    ],
+    pages:{
+        signIn:'/sign-in'
+    },
+    session:{
+        strategy:"jwt"
+    },
+    secret:{
+        
+    }
 }
