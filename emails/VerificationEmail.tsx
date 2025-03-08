@@ -15,7 +15,7 @@ export default  function VerificationEmail({userName,otp}:VerificationEmailProps
                 fallbackFontFamily="Verdana"
                 webFont={{
                     url:'https://font.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1MmxKKTU1Kg.woff2',
-                    format:'wff2'
+                    format:'woff2'
                 }}
                 fontWeight={400}
                 fontStyle="normal"
