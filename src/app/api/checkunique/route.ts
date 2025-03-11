@@ -15,7 +15,15 @@ export async function GET(request:Request){
             username:searchParams.get('username')
         }
         const result=UsernameQuerySchema.safeParse(queryParam)
-        
+        console.log(result)// remove befor execute build command
+        if(!result.success){
+            const usernameErrors=result.error.format().username?._errors || []
+            return Response.json({
+                success:false,
+                message:usernameErrors?.length>0 ? usernameErrors.join(','):'Invalid query parameters'
+            })
+        }
+
         
     } catch (error) {
     console.error("Error Checking username",error)   
