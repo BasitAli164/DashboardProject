@@ -25,9 +25,9 @@ export async function GET(request: Request) {
 
     const user=await userModel.aggregate([
         {$match:{id:userId}},
-        {$unwind:'$messages'},
-        {$sort:{'messages.createdAt':-1}},
-        {$group:{_id:'$_id', messages:{$push:'$messages'}}}
+        {$unwind:'$message'},
+        {$sort:{'message.createdAt':-1}},
+        {$group:{_id:'$_id', message:{$push:'$message'}}}
     ])
     if(!user || user.length===0){
         return Response.json({
@@ -40,13 +40,20 @@ export async function GET(request: Request) {
 
     return Response.json({
         success:true,
-        messages:user[0].messages
+        message:user[0].message
     },{
         status:200
     })
 
     
   } catch (error) {
+    console.error("An unexpected error occure",error)
+    return Response.json({
+      success:false,
+      message:" Not Authenticated"
+  },{
+      status:500
+  })
     
   }
 }
