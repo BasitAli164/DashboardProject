@@ -1,11 +1,11 @@
-import { log } from "console";
 import mongoose from "mongoose";
 
+// Define a TypeScript type for the connection object
 type ConnectionObject={
-    isConnected?:number
+    isConnected?:boolean // Optional property that indicates whether the database is connected (true/false)
 }
-
-const connection:ConnectionObject={}
+// Create an empty connection object based on the defined type
+const connection:ConnectionObject={};
 
 async function dbConnect():Promise<void> {
     if(connection.isConnected){
@@ -15,7 +15,7 @@ async function dbConnect():Promise<void> {
 
     try {
         const db=await mongoose.connect(process.env.MONGODB_RUI ||"")
-        connection.isConnected=db.connections[0].readyState
+        connection.isConnected=db.connections[0].readyState===1;  // Sets isConnected to true only if readyState is 1 (connected)
 
         console.log("Database connected successfully")
         
